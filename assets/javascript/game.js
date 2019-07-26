@@ -22,7 +22,7 @@ let game = {
   opponentCharacter: "",
   opponentCharacterName: "",
   opponentsDefeated: [],
-  opponentRemaining: Object.keys(characters).length
+  opponentRemaining: Object.keys(characters).length - 1
 };
 
 let gameContainer = $("#game-container");
@@ -160,6 +160,8 @@ function gameEnter() {
     playerContainer.attr("style", "display: grid;");
     opponentContainer.fadeIn("slow");
     opponentContainer.attr("style", "display: grid;");
+    $("#attack").fadeIn("slow");
+    $("#attack").attr("style", "display: grid;");
   });
 }
 function fightWon() {
