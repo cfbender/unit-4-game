@@ -1,45 +1,82 @@
 /* font-family: 'Lato', sans-serif; */
 body {
-    background-color: hsl(209, 100%, 91%)
+  background-color: hsl(209, 100%, 91%);
+}
+
+#game-header {
+  text-align: center;
+  margin-top: 50px
+}
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 150%;
+  letter-spacing: 8px;
 }
 .char-image {
-    max-width: 200px;
+  width: 100%;
+  overflow: hidden;
+  object-fit: contain;
 }
 
 #character-select {
-    max-width: 600px;
-    margin: 0 auto;
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: 80px auto auto;
-    justify-content: space-around;
-    align-content: center;    
+  max-width: 750px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 80px auto auto;
+  justify-content: space-around;
+  align-content: center;
+  margin-top: 15px;
+}
+
+.char {
+  grid-area: span 1 / span 1;
+  position: relative;
+}
+
+.char:hover .char-info{
+    opacity: 1;
+    
+}
+
+.char-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;   
+    opacity: 0;   
+    transition: opacity .2s ease-in-out;
+}
+
+.char-text {
+    height: 30px;
+    padding: 10px 0px 0px 0px;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    color: hsla(209, 100%, 100%, 0.8);
+    background-color: hsla(209, 100%, 5%, 0.7);
 }
 
 .select-header {
-    grid-column: 1/4;
-    justify-self: center;
-    align-self: center;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    letter-spacing: 1.2em;
+  grid-column: 1 / 4;
+  justify-self: center;
+  align-self: center;
+  object-fit: contain;
 }
 
+h2 {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 10px;
+}
 
+#game-container {
+  display: none;
+}
 
 @media screen and (max-width: 700px) {
-    .char-image {
-        width: 150px;
-    }
-
-    .select-header {
-        font-size: 60%;
-        font-weight: bold;
-    }
-
-    #character-select {
-        max-width: 450px;
-        grid-gap: 5px;
-    }
+  #character-select {
+    max-width: 450px;
+    grid-gap: 5px;
+  }
 }

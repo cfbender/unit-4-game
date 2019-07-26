@@ -48,7 +48,9 @@ function opponentSwitcher() {
 }
 
 function gameEnter() {
-    
+    $("#character-select").fadeOut("slow", function() {
+        $("game-container").fadeIn("slow");
+    });
 }
 
 for (let char of Object.keys(characters)) {

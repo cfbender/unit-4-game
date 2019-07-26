@@ -13,8 +13,13 @@
     />
   </head>
   <body>
+    <div id="game-header">
+        <header>
+            <h1>STORMLIGHT FIGHT</h1>
+        </header>
+    </div>
     <div id="character-select">
-      <div class="select-header"><h2>CHOOSE YOUR CHARACTER</h2></div>
+      <h2 class="select-header">CHOOSE YOUR CHARACTER</h2>
       <div class = "char" id="adolin">
         <img
           src="./assets/images/adolin.png"
@@ -22,6 +27,9 @@
           class="char-image"
           charName="adolin"
         />
+        <div class="char-info">
+            <div class="char-text">Adolin Kholin</div> 
+        </div>
       </div>
       <div class = "char" id="dalinar">
         <img
@@ -30,6 +38,9 @@
           class="char-image"
           charName="dalinar"
         />
+        <div class="char-info">
+            <div class="char-text">Dalinar Kholin</div> 
+        </div>
       </div>
       <div class = "char" id="jasnah">
         <img
@@ -38,6 +49,9 @@
           class="char-image"
           charName="jasnah"
         />
+        <div class="char-info">
+            <div class="char-text">Jasnah Kholin</div>
+        </div>
       </div>
       <div class = "char" id="kaladin">
         <img
@@ -46,6 +60,9 @@
           class="char-image"
           charName="kaladin"
         />
+        <div class="char-info">
+            <div class="char-text">Kaladin Stormblessed</div>
+        </div>
       </div>
       <div class = "char" id="navani">
         <img
@@ -54,6 +71,9 @@
           class="char-image"
           charName="navani"
         />
+        <div class="char-info">
+            <div class="char-text">Navani Kholin</div>
+        </div>
       </div>
       <div class = "char" id="shallan">
         <img
@@ -62,8 +82,16 @@
           class="char-image"
           charName="shallan"
         />
+        <div class="char-info">
+            <div class="char-text">Shallan Davar</div>
+        </div>
       </div>
-    </div>x
+    </div>
+
+    <div id="game-container">
+        <h2 id="player-character">YOUR CHARACTER</h2>
+        <h2 id="opponent-character">OPPONENT</h2>
+    </div>
   </body>
 
   <script
