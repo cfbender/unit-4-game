@@ -1,0 +1,66 @@
+{define characters (~8)
+    {hp, attack, counterAttack} //all different for each}
+
+{game
+
+characterSelected boolean
+opponentSelected boolean
+gameWin boolean
+playerCharacter 
+opponentCharacter
+opponentRemaining = characters.length
+
+}
+
+$(".character").click(){
+    if characterSelected is false :
+        move character to 'Your Character'
+        set playerCharacter = this.name
+        set characterSelected to true
+        return 0
+    else if opponentSelected is false:
+        move character to 'Defender'
+        set opponentCharacter = this.name
+        set opponentSelected to true
+        display attack button
+        return 0
+    }
+    
+$("#attack).click () {
+    opponentCharacter.hp -= playerCharacter.attack
+    update HTML
+    if opponentCharacter.hp <= 0 :
+        opponentRemaining--
+        if opponentRemaining === 0:
+            gameEnd()
+        else:
+        fightWon()
+    otherwise:
+        playerCharacter.hp -= opponentCharacter.counterAttack
+        update HTML
+    if playerCharacter.hp <= 0 :
+        then gameEnd()
+    otherwise:
+        playerCharacter.attack += characters[playerCharacter].attack
+        update HTML
+}
+
+fightWon (){
+    hide opponentCharacter in HTML
+    hide attack button
+    set opponentSelected to false
+    
+}
+
+gameEnd() {
+    if gameWin:
+        pop up You Win box with new game button
+    else
+        pop up You Lose box with new game button
+}       
+
+$("#new-game).click () {
+    characterSelected to false
+    opponentSelected to false
+    move all characters to select area and unhide
+}

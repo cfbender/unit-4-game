@@ -1,0 +1,31 @@
+/* font-family: 'Lato', sans-serif; */
+
+.char-image {
+    max-width: 100%;
+}
+
+#character-select {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    column-gap: 0;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 80px auto auto;
+    justify-content: space-around;
+    align-content: center;    
+}
+
+.select-header {
+    grid-column: 1/4;
+    justify-self: center;
+    align-self: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+
+@media screen and (max-width: 700px) {
+    .char-image {
+        width: 100px;
+    }
+}
