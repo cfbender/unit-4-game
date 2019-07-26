@@ -17,6 +17,8 @@ h1 {
   width: 100%;
   overflow: hidden;
   object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
 }
 
 #character-select {
@@ -68,6 +70,7 @@ h1 {
     font-family: "Open Sans", sans-serif;
     color: hsla(209, 100%, 100%, 0.8);
     background-color: hsla(209, 100%, 5%, 0.7);
+    border-radius: 10px;
 }
 
 .select-header {
@@ -99,7 +102,7 @@ h2 {
 #opponent-character {
     display: none;
     grid-template-columns: auto;
-    grid-template-rows: 30px 257.51px;
+    grid-template-rows: 30px 260px;
     justify-content: center;
     align-content: center;
 }
@@ -114,9 +117,10 @@ h2 {
 }
 
 #attack {
-    width: 100%;
-    margin-bottom: 10px;
-    background-color:transparent;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color:hsl(209, 100%, 10%);
+  opacity: 0.7;
 	border:2px solid #000000;
 	display:inline-block;
 	cursor:pointer;
