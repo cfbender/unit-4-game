@@ -35,14 +35,14 @@ function charHandler() {
 
   if (!game.characterSelected) {
     game.playerCharacterName = charClicked;
-    game.playerCharacter = characters[charClicked];
+    game.playerCharacter = {...characters[charClicked]};
     playerContainer.append($(charCreator(charClicked)));
     game.characterSelected = true;
     $(this).fadeOut("slow");
     $.when(headerChange("CHOOSE YOUR OPPONENT")).done(opponentSwitcher);
   } else if (!game.opponentSelected) {
     game.opponentCharacterName = charClicked;
-    game.opponentCharacter = characters[charClicked];
+    game.opponentCharacter = {...characters[charClicked]};
     game.opponentSelected = true;
     opponentContainer.append($(charCreator(charClicked)));
     $(this).fadeOut("slow");
@@ -51,9 +51,16 @@ function charHandler() {
 }
 
 function atkHandler() {
+  
   let playerHP = $("#player-hp");
   let opponentHP = $("#opponent-hp");
   let playerAtk = $("#player-atk");
+
+  opponentHP.text(game.opponentCharacter.hp);
+  playerHP.text(game.playerCharacter.hp);
+  playerAtk.text(game.playerCharacter.attack);
+  console.log(game.playerCharacter);
+  console.log(characters);
 
   game.opponentCharacter.hp -= game.playerCharacter.attack;
 
@@ -162,6 +169,7 @@ function gameEnter() {
     opponentContainer.attr("style", "display: grid;");
     $("#attack").fadeIn("slow");
     $("#attack").attr("style", "display: grid;");
+    $(".select-header").fadeOut();
   });
 }
 function fightWon() {
@@ -179,10 +187,16 @@ function fightWon() {
 }
 
 function gameEnd() {
-  //     if gameWin:
-  //         pop up You Win box with new game button
-  //     else
-  //         pop up You Lose box with new game button
+    game.opponentsDefeated.push("#" + game.opponentCharacterName);
+    if (game.gameWin) {
+        opponentSwitcher();
+        $("#win-loss-text").text("YOU WIN!")
+        $(".new-game-screen").fadeIn("slow");
+    } else {
+        opponentSwitcher();
+        $("#win-loss-text").text("YOU LOSE!")
+        $(".new-game-screen").fadeIn("slow");
+    }
 }
 
 for (let char of Object.keys(characters)) {
@@ -194,7 +208,22 @@ $(".char").click(charHandler);
 $("#attack").click(atkHandler);
 
 $("#new-game").click(function() {
-  //     characterSelected to false
-  //     opponentSelected to false
-  //     move all characters to select area and unhide
+    $(".new-game-screen").fadeOut("slow");
+    game.characterSelected = false;
+    game.opponentSelected = false;
+    game.gameWin= false;
+    game.playerCharacter = {};
+    game.playerCharacterName = "";
+    game.opponentCharacter = {};
+    game.opponentCharacterName = "";
+    game.opponentsDefeated = [];
+    game.opponentRemaining = Object.keys(characters).length - 1;
+
+    gameContainer.fadeOut("slow");
+    gameElements.fadeOut("slow");
+    $('#playerCharImg').remove();
+    $('#opponentCharImg').remove();
+    headerChange("CHOOSE YOUR CHARACTER");
+    $("#character-select").fadeIn("slow");
+    $(".char").fadeIn("slow");
 });
