@@ -13,6 +13,7 @@ h1 {
   font-size: 150%;
   letter-spacing: 8px;
 }
+
 .char-image {
   width: 100%;
   overflow: hidden;
@@ -32,13 +33,11 @@ h1 {
 }
 
 .char {
-  grid-area: span 1 / span 1;
   position: relative;
 }
 
 .char:hover .char-info{
-    opacity: 1;
-    
+    opacity: 1;    
 }
 
 .char-info {
@@ -68,11 +67,39 @@ h1 {
 h2 {
   font-family: "Open Sans", sans-serif;
   letter-spacing: 10px;
+  text-align: center;
 }
 
 #game-container {
   display: none;
+  margin: 0 auto;
+  max-width: 600px;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  grid-gap: 15px;
+  margin-top: 15px;
 }
+
+#player-character,
+#opponent-character {
+    display: none;
+    max-width: 250px;
+    grid-template-columns: auto;
+    grid-template-rows: 40px 200px;
+    justify-content: center;
+    align-content: space-around;
+}
+
+#player-character {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+#attack {
+    margin-bottom: 10px;
+}
+
 
 @media screen and (max-width: 700px) {
   #character-select {

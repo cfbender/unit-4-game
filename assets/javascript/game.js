@@ -22,6 +22,11 @@ let game = {
   opponentRemaining: Object.keys(characters).length
 };
 
+let gameContainer = $("#game-container");
+let gameElements = gameContainer.children();
+let playerContainer = $("#player-character");
+let opponentContainer = $("#opponent-character");
+
 function charHandler() {
   let charClicked = this.id;
 
@@ -29,27 +34,37 @@ function charHandler() {
     game.playerCharacter = charClicked;
     game.characterSelected = true;
     $(this).fadeOut("slow");
+    playerContainer.append($("#"+charClicked).clone())
     opponentSwitcher();
   } else if (!game.opponentSelected) {
     game.opponentCharacter = charClicked;
     game.opponentSelected = true;
+    opponentContainer.append($("#"+charClicked).clone())
     gameEnter();
   }
 }
 
 function opponentSwitcher() {
-  $(".char")
-    .not("#" + game.playerCharacter)
-    .show();
-  $(".select-header").fadeOut("slow", function() {
+    gameContainer.fadeOut("slow");
+    gameElements.fadeOut("slow");
+    $(".char")
+        .not("#" + game.playerCharacter)
+        .fadeIn("slow");
+    $(".select-header").fadeOut("slow", function() {
     $(".select-header").text("CHOOSE YOUR OPPONENT");
     $(".select-header").fadeIn("slow");
-  });
+      });
 }
 
 function gameEnter() {
     $("#character-select").fadeOut("slow", function() {
-        $("game-container").fadeIn("slow");
+        gameContainer.fadeIn("slow");
+        gameContainer.attr( "style", "display: grid;" )
+        gameElements.fadeIn("slow");
+        playerContainer.fadeIn("slow");
+        playerContainer.attr( "style", "display: grid;" );
+        opponentContainer.fadeIn("slow");
+        opponentContainer.attr( "style", "display: grid;" );
     });
 }
 
