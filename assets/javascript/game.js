@@ -5,12 +5,12 @@ function Character(hp, attack, counterAttack) {
 }
 
 const characters = {
-  adolin: new Character(24, 6, 2),
-  dalinar: new Character(50, 5, 8),
-  jasnah: new Character(22, 8, 4),
-  kaladin: new Character(30, 5, 5),
-  navani: new Character(20, 3, 5),
-  shallan: new Character(18, 8, 4)
+  adolin: new Character(75, 6, 6),
+  dalinar: new Character(100, 2, 2),
+  jasnah: new Character(65, 8, 4),
+  kaladin: new Character(75, 5, 15),
+  navani: new Character(60, 3, 8),
+  shallan: new Character(55, 8, 10)
 };
 
 let game = {
@@ -189,11 +189,15 @@ function fightWon() {
 function gameEnd() {
     game.opponentsDefeated.push("#" + game.opponentCharacterName);
     if (game.gameWin) {
+        $("#character-select").fadeOut();
         opponentSwitcher();
+        $("#character-select").fadeOut();
         $("#win-loss-text").text("YOU WIN!")
         $(".new-game-screen").fadeIn("slow");
     } else {
+        $("#character-select").fadeOut();
         opponentSwitcher();
+        $("#character-select").fadeOut();
         $("#win-loss-text").text("YOU LOSE!")
         $(".new-game-screen").fadeIn("slow");
     }
