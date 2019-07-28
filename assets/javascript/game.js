@@ -35,14 +35,14 @@ function charHandler() {
 
   if (!game.characterSelected) {
     game.playerCharacterName = charClicked;
-    game.playerCharacter = {...characters[charClicked]};
+    game.playerCharacter = { ...characters[charClicked] };
     playerContainer.append($(charCreator(charClicked)));
     game.characterSelected = true;
     $(this).fadeOut("slow");
     $.when(headerChange("CHOOSE YOUR OPPONENT")).done(opponentSwitcher);
   } else if (!game.opponentSelected) {
     game.opponentCharacterName = charClicked;
-    game.opponentCharacter = {...characters[charClicked]};
+    game.opponentCharacter = { ...characters[charClicked] };
     game.opponentSelected = true;
     opponentContainer.append($(charCreator(charClicked)));
     $(this).fadeOut("slow");
@@ -51,7 +51,6 @@ function charHandler() {
 }
 
 function atkHandler() {
-  
   let playerHP = $("#player-hp");
   let opponentHP = $("#opponent-hp");
   let playerAtk = $("#player-atk");
@@ -111,7 +110,6 @@ function opponentSwitcher() {
 }
 
 function charCreator(charName) {
-  
   let charImage = $(
     '<img src="./assets/images/' +
       charName +
@@ -181,30 +179,26 @@ function fightWon() {
       .promise()
       .done(function() {
         headerChange("CHOOSE YOUR NEXT OPPONENT");
-        $('#opponentCharImg').remove();
+        $("#opponentCharImg").remove();
       });
   });
 }
 
 function gameEnd() {
-    game.opponentsDefeated.push("#" + game.opponentCharacterName);
-    if (game.gameWin) {
-        $("#character-select").fadeOut();
-        opponentSwitcher();
-        $("#character-select").fadeOut();
-        $("#win-loss-text").text("YOU WIN!")
-        $(".new-game-screen").fadeIn("slow");
-    } else {
-        $("#character-select").fadeOut();
-        opponentSwitcher();
-        $("#character-select").fadeOut();
-        $("#win-loss-text").text("YOU LOSE!")
-        $(".new-game-screen").fadeIn("slow");
-    }
-}
-
-for (let char of Object.keys(characters)) {
-  console.log(characters[char].hp);
+  game.opponentsDefeated.push("#" + game.opponentCharacterName);
+  if (game.gameWin) {
+    $("#character-select").fadeOut();
+    opponentSwitcher();
+    $("#character-select").fadeOut();
+    $("#win-loss-text").text("YOU WIN!");
+    $(".new-game-screen").fadeIn("slow");
+  } else {
+    $("#character-select").fadeOut();
+    opponentSwitcher();
+    $("#character-select").fadeOut();
+    $("#win-loss-text").text("YOU LOSE!");
+    $(".new-game-screen").fadeIn("slow");
+  }
 }
 
 $(".char").click(charHandler);
@@ -212,22 +206,22 @@ $(".char").click(charHandler);
 $("#attack").click(atkHandler);
 
 $("#new-game").click(function() {
-    $(".new-game-screen").fadeOut("slow");
-    game.characterSelected = false;
-    game.opponentSelected = false;
-    game.gameWin= false;
-    game.playerCharacter = {};
-    game.playerCharacterName = "";
-    game.opponentCharacter = {};
-    game.opponentCharacterName = "";
-    game.opponentsDefeated = [];
-    game.opponentRemaining = Object.keys(characters).length - 1;
+  $(".new-game-screen").fadeOut("slow");
+  game.characterSelected = false;
+  game.opponentSelected = false;
+  game.gameWin = false;
+  game.playerCharacter = {};
+  game.playerCharacterName = "";
+  game.opponentCharacter = {};
+  game.opponentCharacterName = "";
+  game.opponentsDefeated = [];
+  game.opponentRemaining = Object.keys(characters).length - 1;
 
-    gameContainer.fadeOut("slow");
-    gameElements.fadeOut("slow");
-    $('#playerCharImg').remove();
-    $('#opponentCharImg').remove();
-    headerChange("CHOOSE YOUR CHARACTER");
-    $("#character-select").fadeIn("slow");
-    $(".char").fadeIn("slow");
+  gameContainer.fadeOut("slow");
+  gameElements.fadeOut("slow");
+  $("#playerCharImg").remove();
+  $("#opponentCharImg").remove();
+  headerChange("CHOOSE YOUR CHARACTER");
+  $("#character-select").fadeIn("slow");
+  $(".char").fadeIn("slow");
 });
