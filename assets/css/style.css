@@ -184,6 +184,15 @@ a {
 	  text-decoration:none;
 	  text-shadow:0px 1px 2px #000000;
 }
+
+.bg-splash {
+  position: fixed;
+  opacity: 0.25;
+  bottom:-40px;
+  margin: 0 auto;
+  z-index: -1;  
+}
+
 @media screen and (max-width: 700px) {
   #character-select,
   #game-container {
