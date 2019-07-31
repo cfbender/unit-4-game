@@ -4,11 +4,12 @@ function Character(hp, attack, counterAttack) {
   this.counterAttack = counterAttack;
 }
 
+//defining character stats
 const characters = {
-  adolin: new Character(75, 6, 6),
+  adolin: new Character(60, 6, 6),
   dalinar: new Character(100, 2, 2),
   jasnah: new Character(65, 8, 4),
-  kaladin: new Character(75, 5, 15),
+  kaladin: new Character(60, 5, 15),
   navani: new Character(60, 3, 8),
   shallan: new Character(55, 8, 10)
 };
@@ -33,14 +34,17 @@ let opponentContainer = $("#opponent-character");
 function charHandler() {
   let charClicked = this.id;
 
+  //if you havent selected a player character, set the character to a clone of the object of that character
   if (!game.characterSelected) {
     game.playerCharacterName = charClicked;
     game.playerCharacter = { ...characters[charClicked] };
     playerContainer.append($(charCreator(charClicked)));
     game.characterSelected = true;
+    //fades out the character and changes the header
     $(this).fadeOut("slow");
     $.when(headerChange("CHOOSE YOUR OPPONENT")).done(opponentSwitcher);
   } else if (!game.opponentSelected) {
+    //same as for a player character then enters the game
     game.opponentCharacterName = charClicked;
     game.opponentCharacter = { ...characters[charClicked] };
     game.opponentSelected = true;
@@ -58,14 +62,12 @@ function atkHandler() {
   opponentHP.text(game.opponentCharacter.hp);
   playerHP.text(game.playerCharacter.hp);
   playerAtk.text(game.playerCharacter.attack);
-  console.log(game.playerCharacter);
-  console.log(characters);
-
+  //when attacking, lower the opponents hp by your attack
   game.opponentCharacter.hp -= game.playerCharacter.attack;
-
+  //update color to show health lost
   opponentHP.css("color", "#E30531");
   opponentHP.text(game.opponentCharacter.hp);
-
+  //check if you defeated the opponent
   if (game.opponentCharacter.hp <= 0) {
     game.opponentRemaining--;
     if (game.opponentRemaining === 0) {
@@ -91,7 +93,7 @@ function atkHandler() {
     }
   }
 }
-
+//handles the changing of the text of the header
 function headerChange(newText) {
   $(".select-header").fadeOut("slow", function() {
     $(".select-header").text(newText);
@@ -99,6 +101,7 @@ function headerChange(newText) {
   });
 }
 
+//handles switching to opponent selection screen
 function opponentSwitcher() {
   gameContainer.fadeOut("slow");
   gameElements.fadeOut("slow");
@@ -108,7 +111,7 @@ function opponentSwitcher() {
     .not(game.opponentsDefeated.join(","))
     .fadeIn("slow");
 }
-
+//creates the div that holds the characters on the battle screen
 function charCreator(charName) {
   let charImage = $(
     '<img src="./assets/images/' +
@@ -155,7 +158,7 @@ function charCreator(charName) {
 
   return charDiv;
 }
-
+//handles animations for entering the game from the character select screen
 function gameEnter() {
   $("#character-select").fadeOut("slow", function() {
     gameContainer.fadeIn("slow");
@@ -170,6 +173,7 @@ function gameEnter() {
     $(".select-header").fadeOut();
   });
 }
+//handles the animations from winning a single fight
 function fightWon() {
   game.opponentsDefeated.push("#" + game.opponentCharacterName);
   $("#attack").fadeOut(200, function() {
@@ -184,12 +188,14 @@ function fightWon() {
   });
 }
 
+//handles win and loss and displays the option to start a new game
 function gameEnd() {
   game.opponentsDefeated.push("#" + game.opponentCharacterName);
   if (game.gameWin) {
     $("#character-select").fadeOut();
     opponentSwitcher();
     $("#character-select").fadeOut();
+    $(".select-header").fadeOut();
     $("#win-loss-text").text("YOU WIN!");
     $(".new-game-screen").fadeIn("slow");
   } else {
@@ -205,6 +211,7 @@ $(".char").click(charHandler);
 
 $("#attack").click(atkHandler);
 
+//re-initializes the game
 $("#new-game").click(function() {
   $(".new-game-screen").fadeOut("slow");
   game.characterSelected = false;
@@ -223,5 +230,6 @@ $("#new-game").click(function() {
   $("#opponentCharImg").remove();
   headerChange("CHOOSE YOUR CHARACTER");
   $("#character-select").fadeIn("slow");
+  $(".select-header").fadeIn("slow");
   $(".char").fadeIn("slow");
 });
